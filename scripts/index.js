@@ -1,12 +1,13 @@
 // import {$,jQuery} from 'jquery';
 import store from './store.js';
+import api from './api.js';
+
 //************** Event Functions **************
 function handleAddClick(){
   $('#new').click(function() {
     renderAddPage();
     handleCancelClick();
     handleNewSubmit();
-    displayAddPage();
   });
 }
 
@@ -22,6 +23,17 @@ function handleNewSubmit(){
     event.preventDefault();
     $(event.currentTarget).closest('#content').find('#float-box').toggle();
     console.log('submit click working');
+    console.log(`${#newTitle.val()}`);
+    let bookmark = {
+      title: 'Dog',
+      desc: 'Puppy',
+      url: 'https://www.dog.com',
+      rating: '4'
+    };
+    console.log(api.create(bookmark));
+    bookmark.expanded = false;
+    store.store.bookmarks.push(bookmark);
+    console.log(store.store.bookmarks);
     renderBookmarks();
   });
 }
@@ -44,6 +56,7 @@ function displayAddPage(){
   $('body').on('click','#new',function(e){
     console.log('display add page running');
     $(e.currentTarget).closest('#content').find('#float-box').toggle();
+    
   });
 }
 
@@ -108,6 +121,28 @@ function renderHomeScreen(){
 }
 
 function bookmarkHtml(){
+  let booksList = `<ul id='bookmarks-list'>`;
+  for (let i=0; i < store.store.bookmarks.length; i++){
+    booksList+= `<li class='list-item'>
+    <div class='list-item-bar'>
+      <a href="#">
+        <section class='name'>${store.store.bookmarks[i].title}</section> 
+        <section class='rating'>${store.store.bookmarks[i].rating}</section>
+      </a>
+    </div>
+    <div class ='list-item-expanded'>
+    <form action="${store.store.bookmarks[i].url}" target="_blank">
+    <input type="submit" class='visit' value="Visit Site" />
+    <button type='button' id='delete'>Trash</button>
+    </form>
+      <p id='description'>
+      ${store.store.bookmarks[i].desc}
+      </p>
+    </div>  
+  </li>`;
+  }
+  booksList+='</ul>';
+  return booksList;
   return `    
   <ul id='bookmarks-list'>
   <li class='list-item'>
@@ -176,5 +211,6 @@ function main(){
   deleteBookmark();
   renderBookmarks();
   console.log(store.store.bookmarks[0].title);
+  displayAddPage();
 }
 $(main);

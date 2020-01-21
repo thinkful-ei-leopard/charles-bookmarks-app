@@ -1,3 +1,5 @@
+import api from './api.js';
+
 const store = {
   bookmarks: [
     {
@@ -5,7 +7,7 @@ const store = {
       title: 'Title 1',
       rating: 3,
       url: 'http://www.title1.com',
-      description: 'lorem ipsum dolor sit',
+      desc: 'lorem ipsum dolor sit',
       expanded: false
     },
     {
@@ -13,7 +15,7 @@ const store = {
       title: 'Title 2',
       rating: 5,
       url: 'http://www.title2.com',
-      description: 'dolorum tempore deserunt',
+      desc: 'dolorum tempore deserunt',
       expanded: false
     }, 
     {
@@ -21,7 +23,7 @@ const store = {
       title: 'Title 11',
       rating: 5,
       url: 'http://www.title11.com',
-      description: 'lorem ipsum dolor',
+      desc: 'lorem ipsum dolor',
       expanded: true
     }
   ],
@@ -30,6 +32,10 @@ const store = {
   filter: 0
 };
 
+// console.log(api.bookmarksTest);
+
+
 export default {
   store
 };
+

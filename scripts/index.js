@@ -1,5 +1,5 @@
 // import {$,jQuery} from 'jquery';
-import store from store
+import store from './store.js';
 //************** Event Functions **************
 function handleAddClick(){
   $('#new').click(function() {
@@ -113,51 +113,52 @@ function bookmarkHtml(){
   <li class='list-item'>
     <div class='list-item-bar'>
       <a href="#">
-        <section class='name'>Bookmark 1</section> 
-        <section class='rating'>#####</section>
+        <section class='name'>${store.store.bookmarks[0].title}</section> 
+        <section class='rating'>${store.store.bookmarks[0].rating}</section>
       </a>
     </div>
     <div class ='list-item-expanded'>
-      <button type='button' id='visit'>Visit Site</button>
-      <button type='button' id='delete'>Trash</button>
+    <form action="${store.store.bookmarks[0].url}" target="_blank">
+    <input type="submit" class='visit' value="Visit Site" />
+    <button type='button' id='delete'>Trash</button>
+    </form>
       <p id='description'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Tellus elementum sagittis vitae et leo duis ut.
+      ${store.store.bookmarks[0].description}
       </p>
     </div>  
   </li>
   <li class='list-item'>
     <div class='list-item-bar'>
       <a href="#">
-        <section class='name'>Bookmark 2</section> 
-        <section class='rating'>##</section>
+        <section class='name'>${store.store.bookmarks[1].title}</section> 
+        <section class='rating'>${store.store.bookmarks[1].rating}</section>
       </a>
     </div>
     <div class ='list-item-expanded'>
-      <button type='button' id='visit'>Visit Site</button>
-      <button type='button' id='delete'>Trash</button>
+    <form action="${store.store.bookmarks[1].url}" target="_blank">
+    <input type="submit" class='visit' value="Visit Site" />
+    <button type='button' id='delete'>Trash</button>
+    </form>
+      
       <p id='description'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Tellus elementum sagittis vitae et leo duis ut.
+      ${store.store.bookmarks[1].description}
       </p>
     </div>  
   </li>
   <li class='list-item'>
     <div class='list-item-bar'>
       <a href="#">
-        <section class='name'>Bookmark 3</section> 
-        <section class='rating'>####</section>
+        <section class='name'>${store.store.bookmarks[2].title}</section> 
+        <section class='rating'>${store.store.bookmarks[2].rating}</section>
       </a>
     </div>
     <div class ='list-item-expanded'>
-      <button type='button' id='visit'>Visit Site</button>
+      <form action="${store.store.bookmarks[2].url}" target="_blank">
+      <input type="submit" class='visit' value="Visit Site" />
       <button type='button' id='delete'>Trash</button>
+      </form>
       <p id='description'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Tellus elementum sagittis vitae et leo duis ut.
+      ${store.store.bookmarks[2].description}
       </p>
     </div>  
   </li>
@@ -174,6 +175,6 @@ function main(){
   handleBookmarkClick();
   deleteBookmark();
   renderBookmarks();
-
+  console.log(store.store.bookmarks[0].title);
 }
 $(main);

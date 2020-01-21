@@ -19,5 +19,9 @@
   "homepage": "https://github.com/thinkful-ei-leopard/charles-bookmarks-app#readme",
   "dependencies": {
     "jquery": "^3.4.1"
+  },
+
+  "parserOptions": {
+   "sourceType": "module"
   }
 }

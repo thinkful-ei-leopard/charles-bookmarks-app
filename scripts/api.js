@@ -21,11 +21,11 @@ const create = function(blogData){
     .catch(err => console.error(err.message));
 };
 
-const deleteBookmark = function(id) {
-  return fetch(bookmarkURL+id, {
-    method: 'DELETE'
-  });
-};
+// const deleteBookmark = function(id) {
+//   return fetch(bookmarkURL+id, {
+//     method: 'DELETE'
+//   });
+// };
 
 // const getBookmarks = function(){
 //   fetch(bookmarkURL)
@@ -67,5 +67,5 @@ export default{
   // getBookmarks,
   bookmarkURL,
   create,
-  deleteBookmark
+  // deleteBookmark
 };

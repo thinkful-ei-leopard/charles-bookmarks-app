@@ -23,12 +23,12 @@ function handleNewSubmit(){
     event.preventDefault();
     $(event.currentTarget).closest('#content').find('#float-box').toggle();
     console.log('submit click working');
-    console.log(`${#newTitle.val()}`);
+    console.log($('#description').val());
     let bookmark = {
-      title: 'Dog',
-      desc: 'Puppy',
-      url: 'https://www.dog.com',
-      rating: '4'
+      title: $('#newTitle').val(),
+      desc: $('#info').val(),
+      url: $('#newBookmark').val(),
+      rating: $('#submit-rating').val()
     };
     console.log(api.create(bookmark));
     bookmark.expanded = false;
@@ -77,14 +77,15 @@ function renderAddPage(){
       </form>
       <form id='titleRating'>
         Title <input type='text' name='newtitle' id='newTitle' placeholder='Name Your Bookmark' value=''><br>
-        <select>
-          <option value='1-star'>1 Star</option>
-          <option value='2-star'>2 Star</option>
-          <option value='3-star'>3 Star</option>
-          <option value='4-star'>4 Star</option>
-          <option value='5-star'>5 Stars</option>
+        <select id='submit-rating'>
+          <option value='1'>1 Star</option>
+          <option value='2'>2 Star</option>
+          <option value='3'>3 Star</option>
+          <option value='5'>4 Star</option>
+          <option value='5'>5 Stars</option>
         </select>
-        <textarea rows='6' cols='40' placeholder='Add a description(optional)'>
+        Add a description(optional)
+        <textarea id='info' rows='6' cols='40'>
         </textarea>
         <section id='submitSection'>
           <button type='button' id='cancel'>Cancel</button>
@@ -103,7 +104,7 @@ function renderHomeScreen(){
   <h1 id='header'>My Bookmarks</h1>
   <section id='options'>
     <button type='button' id='new'>+New</button>
-    <select>
+    <select id=''>
       <option value='1-star'>1 Star+</option>
       <option value='2-star'>2 Star+</option>
       <option value='3-star'>3 Star+</option>
@@ -121,7 +122,7 @@ function renderHomeScreen(){
 }
 
 function bookmarkHtml(){
-  let booksList = `<ul id='bookmarks-list'>`;
+  let booksList = '<ul id=\'bookmarks-list\'>';
   for (let i=0; i < store.store.bookmarks.length; i++){
     booksList+= `<li class='list-item'>
     <div class='list-item-bar'>
@@ -133,9 +134,9 @@ function bookmarkHtml(){
     <div class ='list-item-expanded'>
     <form action="${store.store.bookmarks[i].url}" target="_blank">
     <input type="submit" class='visit' value="Visit Site" />
-    <button type='button' id='delete'>Trash</button>
+    <button type='button' class='delete'>Trash</button>
     </form>
-      <p id='description'>
+      <p class='description'>
       ${store.store.bookmarks[i].desc}
       </p>
     </div>  
@@ -143,62 +144,6 @@ function bookmarkHtml(){
   }
   booksList+='</ul>';
   return booksList;
-  return `    
-  <ul id='bookmarks-list'>
-  <li class='list-item'>
-    <div class='list-item-bar'>
-      <a href="#">
-        <section class='name'>${store.store.bookmarks[0].title}</section> 
-        <section class='rating'>${store.store.bookmarks[0].rating}</section>
-      </a>
-    </div>
-    <div class ='list-item-expanded'>
-    <form action="${store.store.bookmarks[0].url}" target="_blank">
-    <input type="submit" class='visit' value="Visit Site" />
-    <button type='button' id='delete'>Trash</button>
-    </form>
-      <p id='description'>
-      ${store.store.bookmarks[0].description}
-      </p>
-    </div>  
-  </li>
-  <li class='list-item'>
-    <div class='list-item-bar'>
-      <a href="#">
-        <section class='name'>${store.store.bookmarks[1].title}</section> 
-        <section class='rating'>${store.store.bookmarks[1].rating}</section>
-      </a>
-    </div>
-    <div class ='list-item-expanded'>
-    <form action="${store.store.bookmarks[1].url}" target="_blank">
-    <input type="submit" class='visit' value="Visit Site" />
-    <button type='button' id='delete'>Trash</button>
-    </form>
-      
-      <p id='description'>
-      ${store.store.bookmarks[1].description}
-      </p>
-    </div>  
-  </li>
-  <li class='list-item'>
-    <div class='list-item-bar'>
-      <a href="#">
-        <section class='name'>${store.store.bookmarks[2].title}</section> 
-        <section class='rating'>${store.store.bookmarks[2].rating}</section>
-      </a>
-    </div>
-    <div class ='list-item-expanded'>
-      <form action="${store.store.bookmarks[2].url}" target="_blank">
-      <input type="submit" class='visit' value="Visit Site" />
-      <button type='button' id='delete'>Trash</button>
-      </form>
-      <p id='description'>
-      ${store.store.bookmarks[2].description}
-      </p>
-    </div>  
-  </li>
-</ul>
-  `;
 }
 
 function renderBookmarks(){
@@ -210,7 +155,6 @@ function main(){
   handleBookmarkClick();
   deleteBookmark();
   renderBookmarks();
-  console.log(store.store.bookmarks[0].title);
   displayAddPage();
 }
 $(main);

@@ -32,7 +32,7 @@ const store = {
   filter: 0
 };
 
-// console.log(api.bookmarksTest);
+console.log(api.storeBookmarks(responseJson));
 
 
 export default {

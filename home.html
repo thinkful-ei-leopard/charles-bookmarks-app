@@ -40,3 +40,62 @@
 </section>
 </body>
 </html>
+
+<!-- Keeping just in case -->
+
+return `    
+<ul id='bookmarks-list'>
+<li class='list-item'>
+  <div class='list-item-bar'>
+    <a href="#">
+      <section class='name'>${store.store.bookmarks[0].title}</section> 
+      <section class='rating'>${store.store.bookmarks[0].rating}</section>
+    </a>
+  </div>
+  <div class ='list-item-expanded'>
+  <form action="${store.store.bookmarks[0].url}" target="_blank">
+  <input type="submit" class='visit' value="Visit Site" />
+  <button type='button' id='delete'>Trash</button>
+  </form>
+    <p id='description'>
+    ${store.store.bookmarks[0].description}
+    </p>
+  </div>  
+</li>
+<li class='list-item'>
+  <div class='list-item-bar'>
+    <a href="#">
+      <section class='name'>${store.store.bookmarks[1].title}</section> 
+      <section class='rating'>${store.store.bookmarks[1].rating}</section>
+    </a>
+  </div>
+  <div class ='list-item-expanded'>
+  <form action="${store.store.bookmarks[1].url}" target="_blank">
+  <input type="submit" class='visit' value="Visit Site" />
+  <button type='button' id='delete'>Trash</button>
+  </form>
+    
+    <p id='description'>
+    ${store.store.bookmarks[1].description}
+    </p>
+  </div>  
+</li>
+<li class='list-item'>
+  <div class='list-item-bar'>
+    <a href="#">
+      <section class='name'>${store.store.bookmarks[2].title}</section> 
+      <section class='rating'>${store.store.bookmarks[2].rating}</section>
+    </a>
+  </div>
+  <div class ='list-item-expanded'>
+    <form action="${store.store.bookmarks[2].url}" target="_blank">
+    <input type="submit" class='visit' value="Visit Site" />
+    <button type='button' id='delete'>Trash</button>
+    </form>
+    <p id='description'>
+    ${store.store.bookmarks[2].description}
+    </p>
+  </div>  
+</li>
+</ul>
+`;

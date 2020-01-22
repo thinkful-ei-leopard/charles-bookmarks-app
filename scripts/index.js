@@ -39,9 +39,10 @@ function handleNewSubmit(){
 }
 
 function deleteBookmark(){
-  $('body').on('click','#delete',function(e){
+  $('body').on('click','.delete',function(e){
     $(e.currentTarget).closest('li').remove();
-    //renderBookmarks();
+    console.log(e.currentTarget);
+    renderBookmarks();
   });
   
 }
@@ -58,6 +59,14 @@ function displayAddPage(){
     $(e.currentTarget).closest('#content').find('#float-box').toggle();
     
   });
+}
+
+function getBookmarks(){
+  fetch(api.bookmarkURL)
+    .then(response => response.json())
+    .then(responseJson => store.store.bookmarks = responseJson) 
+    .then(responseJson => renderBookmarks())
+    .then(responseJson => console.log(store.store.bookmarks));   
 }
 
 
@@ -154,7 +163,16 @@ function main(){
   renderHomeScreen();
   handleBookmarkClick();
   deleteBookmark();
-  renderBookmarks();
+  getBookmarks();
+  // renderBookmarks();
   displayAddPage();
 }
 $(main);
+
+export default{
+  renderHomeScreen,
+  handleBookmarkClick,
+  deleteBookmark,
+  renderBookmarks,
+  displayAddPage
+};

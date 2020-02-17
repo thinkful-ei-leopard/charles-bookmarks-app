@@ -20,8 +20,8 @@
   "dependencies": {
     "jquery": "^3.4.1"
   },
-
   "parserOptions": {
-   "sourceType": "module"
-  }
+    "sourceType": "module"
+  },
+  "devDependencies": {}
 }

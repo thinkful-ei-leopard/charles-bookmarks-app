@@ -1,71 +1,46 @@
-import store from './store.js';
-import index from './index.js';
+const API = (function() {
 
-const bookmarkURL = 'https://thinkful-list-api.herokuapp.com/charles/bookmarks';
+  const BASE_URL = 'https://thinkful-list-api.herokuapp.com/charles';
 
-// const blogData = JSON.stringify({
-//   title: 'Testmark 3',
-//   url: 'https://www.testmark.com',
-//   desc: 'dolorum tempore deserunt',
-//   rating: 3  
-// });
+  function getBookmarks(callback) {
+    $.getJSON(`${BASE_URL}/bookmarks`, callback);
+  }
 
-const create = function(blogData){
-  fetch(bookmarkURL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(blogData)
-  })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err.message));
-};
+  function createNewBookmark(bookmarkObject, callback, errorCallback) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks`,
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(bookmarkObject),
+      success: callback,
+      error: errorCallback
+    });
+  }
 
-// const deleteBookmark = function(id) {
-//   return fetch(bookmarkURL+id, {
-//     method: 'DELETE'
-//   });
-// };
+  function deleteBookmark(id, callback, errorCallback) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks/${id}`,
+      method: 'DELETE',
+      success: callback,
+      error: errorCallback
+    });
+  }
 
-// const getBookmarks = function(){
-//   fetch(bookmarkURL)
-//     .then(response => response.json())
-//     .then(responseJson => store.store.bookmarks = responseJson) 
-//     .then(index.renderBookmarks())
-//     .then(console.log(store.store.bookmarks));
-    
-// };
+  function updateBookmark(id, updateObject, callback, errorCallback) {
+    $.ajax({
+      url: `${BASE_URL}/bookmarks/${id}`,
+      method: 'PATCH',
+      contentType: 'application/json',
+      data: JSON.stringify(updateObject),
+      success: callback,
+      error: errorCallback
+    });
+  }
 
-// console.log(getBookmarks);
-
-// const test = function(){
-//   return store.store.bookmarks;
-  
-// };
-// console.log(store.store.bookmarks);
-
-
-// const storeBookmarks = function(responseJson){
-//   for(let i=0; i < responseJson.length; i++){
-//     return {
-//       title: responseJson[i].title,
-//       rating: responseJson[i].rating,
-//       desc: responseJson[i].desc
-//     };
-//   }
-// };
-
-// storeBookmarks();
-
-function main(){
-  // getBookmarks();
-}
-$(main);
-
-
-export default{
-  // getBookmarks,
-  bookmarkURL,
-  create,
-  // deleteBookmark
-};
+  return {
+    createNewBookmark,
+    deleteBookmark,
+    getBookmarks,
+    updateBookmark
+  };
+})();

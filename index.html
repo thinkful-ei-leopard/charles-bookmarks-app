@@ -1,21 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>My Bookmarks</title>
-  <!-- <script src="https://kit.fontawesome.com/bb2edf1868.js" crossorigin="anonymous"></script> -->
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:400,600,700,800" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
+  <link rel='stylesheet' href='styles/index.css'>
+  
 </head>
-<body id='body'>
- 
+
+<body>
+  <header class='row' role='banner'>
+    <h1>Bookmarks</h1>
+  </header>
+
+  <main role='main'>
+    <section class="row">
+      <div class='controls'>
+        <button id='js-new-bookmark'>NEW BOOKMARK</button>
+
+        <select class='filter-control' id='js-filter-control' name='filter' aria-label='Filter ratings by minimum rating'>
+          <option value='0'>All</option>
+          <option value='5'>5 stars</option>
+          <option value='4'>4+ stars</option>
+          <option value='3'>3+ stars</option>
+          <option value='2'>2+ stars</option>
+        </select>
+        <label for='filter-control' id='filter-label'>Filter </label>
+
+      </div>
+    </section>
+
+    <section class='row'>
+      <div id='js-form-container' class='form-container'></div>
+    </section>
+
+    <section class='row error-message-container'>
+      <span id='js-error-message'>
+      </span>
+    </section>
+
+    <section class="row">
+      <div class='bookmark-container'>
+        <ul class='js-bookmarks-container'></ul>
+      </div>
+    </section>
+  </main>
+
   <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <!-- <script type="module" src="./styles/styles.css"></script> -->
-  <script type="module" src="./scripts/store.js"></script>
-  <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/api.js"></script>
+  <script type="text/javascript" src="scripts/extend.js"></script>
+  <script type="text/javascript" src="scripts/store.js"></script>
+  <script type="text/javascript" src="scripts/generator.js"></script>
+  <script type="text/javascript" src="scripts/bookmarks.js"></script>
+  <script type="text/javascript" src="scripts/api.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+
 </body>
+
 </html>

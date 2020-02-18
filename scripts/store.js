@@ -1,45 +1,121 @@
-import api from './api.js';
 
-const addBookmarks = function(){
+const Store = (function() {
+
+  function addBookmark(bookmarkObject) {
   
-};
-const store = {
-
-  bookmarks: [
-    // {
-    //   id: 'x56w',
-    //   title: 'Title 1',
-    //   rating: 3,
-    //   url: 'http://www.title1.com',
-    //   desc: 'lorem ipsum dolor sit',
-    //   expanded: false
-    // },
-    // {
-    //   id: '6ffw',
-    //   title: 'Title 2',
-    //   rating: 5,
-    //   url: 'http://www.title2.com',
-    //   desc: 'dolorum tempore deserunt',
-    //   expanded: false
-    // }, 
-    // {
-    //   id: '7ddr',
-    //   title: 'Title 11',
-    //   rating: 5,
-    //   url: 'http://www.title11.com',
-    //   desc: 'lorem ipsum dolor',
-    //   expanded: true
-    // }
-  ],
-  adding: false,
-  error: null,
-  filter: 0
-};
+    const defaultObjectProps = {
+      expanded: false
+    };
+    this.bookmarks.push(Object.assign(bookmarkObject, defaultObjectProps));
+  }
 
 
+  function updateBookmark(bookmarkID, bookmarkToMerge) {
+    const object = this.bookmarks.find(bookmark => bookmark.id === bookmarkID);
+    Object.assign(object, bookmarkToMerge);
+  }
+
+  function setAddingBookmarkStatus(bool) {
+    this.addingBookmark = bool;
+  }
 
 
-export default {
-  store
-};
+  function setUpdatingBookmarkStatus(bool) {
+    this.updatingBookmark = bool;
+  }
 
+ 
+  function deleteBookmark(bookmarkID) {
+    this.bookmarks = this.bookmarks.filter(
+      bookmark => bookmark.id !== bookmarkID
+    );
+  }
+
+
+  function filterBookmarksByRating(rating) {
+    setRatingFilter(rating);
+    this.bookmarks = filterStoreBookmarksArray();
+  }
+
+
+  function filterStoreBookmarksArray() {
+    this.bookmarks.filter(bookmark => bookmark.rating >= this.ratingFilter);
+  }
+
+  function toggleBookmarkExpanded(bookmarkID) {
+    const bookmarkToToggle = this.bookmarks.find(
+      bookmark => bookmark.id === bookmarkID
+    );
+    bookmarkToToggle.expanded = !bookmarkToToggle.expanded;
+  }
+
+
+  function setErrorMessage(error) {
+    this.errorMessage = error;
+  }
+
+
+  function setRatingFilter(value) {
+    this.ratingFilter = value;
+  }
+
+
+  function findByID(bookmarkID) {
+    return this.bookmarks.find(bookmark => bookmark.id === bookmarkID);
+  }
+
+
+  function findAndDelete(bookmarkID) {
+    this.bookmarks = this.bookmarks.filter(
+      bookmark => bookmark.id !== bookmarkID
+    );
+  }
+
+  function checkIfShouldBeHidden(bookmark) {
+    return !bookmark.expanded ? 'hidden' : '';
+  }
+
+
+  function checkIfAddingBookmark() {
+    return this.addingBookmark;
+  }
+
+
+  function checkIfEditingBookmark() {
+    return this.updatingBookmark;
+  }
+
+
+  function setEditingObject(object) {
+    this.editingObject.title = object.title;
+    this.editingObject.desc = object.desc;
+    this.editingObject.url = object.url;
+    this.editingObject.rating = object.rating;
+  }
+
+  function resetEditingObject() {
+    this.editingObject = {};
+  }
+
+  return {
+    bookmarks: [],
+    ratingFilter: 0,
+    editingObject: {},
+    addBookmark,
+    checkIfAddingBookmark,
+    setAddingBookmarkStatus,
+    deleteBookmark,
+    filterBookmarksByRating,
+    toggleBookmarkExpanded,
+    setErrorMessage,
+    findByID,
+    setRatingFilter,
+    findAndDelete,
+    checkIfShouldBeHidden,
+    updateBookmark,
+    setUpdatingBookmarkStatus,
+    checkIfEditingBookmark,
+    setEditingObject,
+    resetEditingObject
+  };
+})();
